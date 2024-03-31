@@ -1,0 +1,16 @@
+<resources>
+    <string name="converted_money">Converted Money</string>
+    <string name="no_matches_found">Data tidak di temukan</string>
+    <string name="convert">Mengubah</string>
+    <string name="kembali">Kembali</string>
+    <string name="tentang_aplikasi">Tentang Aplikasi</string>
+    <string name="error">Mengubah</string>
+    <string name="amount">Jumlah</string>
+    <string name="copyright">Aplikasi ini adalah aplikasi untuk mengetahui nilai mata uang diberbagai negara. dan aplikasi ini adalah aplikasi assesment 1 matakuliah Mobro \n\nCopyright © 2024 Muhammad Kafaby - 6706220149</string>
+    <string name="from_currency">Dari Mata Uang</string>
+    <string name="to_currency">Ke Mata Uang</string>
+    <string name="bagikan">Bagikan</string>
+    <string name="share_template">Jumlah: %1$s \nDari Mata Uang: %2$s \nKe Mata Uang: %3$s \nHasilnya: %4$s</string>
+
+
+</resources>

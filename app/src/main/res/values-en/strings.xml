@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="converted_money">Converted Money</string>
+    <string name="no_matches_found">Data not found</string>
+    <string name="convert">Change</string>
+    <string name="kembali">Return</string>
+    <string name="tentang_aplikasi">About Application</string>
+    <string name="error">Change</string>
+    <string name="amount">Amount</string>
+    <string name="copyright">This application is an application to find out the value of currency in various countries. and this application is an assessment application for 1 Mobro course  \n\nCopyright © 2024 Muhammad Kafaby - 6706220149</string>
+    <string name="from_currency">From Currency</string>
+    <string name="to_currency">To Currency</string>
+    <string name="bagikan">Share</string>
+    <string name="share_template">Amount: %1$s \nFrom Currency: %2$s \nTo Currency: %3$s \nResult: %4$s</string>
+</resources>
