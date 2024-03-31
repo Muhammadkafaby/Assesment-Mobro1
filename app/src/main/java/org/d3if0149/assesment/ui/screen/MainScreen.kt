@@ -175,23 +175,22 @@ fun ScreenContent(modifier: Modifier) {
             coroutineScope: CoroutineScope = rememberCoroutineScope(),
             isError: Boolean,
         ) {
-            // Get our text for the selected option
+
             val selectedOptionText = rememberSaveable(selectedOption) {
                 selectedOption?.let { optionToString(it) }.orEmpty()
             }
 
-            // Default our text input to the selected option
+
             var textInput by rememberSaveable(selectedOptionText) {
                 mutableStateOf(selectedOptionText)
             }
 
             var dropDownExpanded by rememberSaveable { mutableStateOf(false) }
 
-            // Update our filtered options everytime our text input changes
+
             val filteredOptions = rememberSaveable(textInput, dropDownExpanded) {
                 when (dropDownExpanded) {
-                    true -> filteredOptions(textInput).filter { it != otherSelectedOption } // Filter out the other selected option
-                    // Skip filtering when we don't need to
+                    true -> filteredOptions(textInput).filter { it != otherSelectedOption }
                     false -> emptyList()
                 }
             }
@@ -209,38 +208,35 @@ fun ScreenContent(modifier: Modifier) {
                     value = textInput,
 
                     onValueChange = {
-                        // Dropdown may auto hide for scrolling but it's important it always shows when a user
-                        // does a search
+
                         dropDownExpanded = true
                         textInput = it.uppercase(Locale.getDefault())
                     },
                     modifier = Modifier
-                        // Match the parent width
+
                         .fillMaxWidth()
                         .bringIntoViewRequester(bringIntoViewRequester)
                         .menuAnchor()
                         .focusRequester(focusRequester)
                         .onFocusChanged { focusState ->
-                            // When only 1 option left when we lose focus, selected it.
+
                             if (!focusState.isFocused) {
-                                // Whenever we lose focus, always hide the dropdown
+
                                 dropDownExpanded = false
 
                                 when (filteredOptions.size) {
-                                    // Auto select the single option
+
                                     1 -> if (filteredOptions.first() != selectedOption) {
                                         onOptionSelected(filteredOptions.first())
                                     }
-                                    // Nothing to we can auto select - reset our text input to the selected value
+
                                     else -> textInput = selectedOptionText
                                 }
                             } else {
-                                // When focused:
-                                // Ensure field is visible by scrolling to it
                                 coroutineScope.launch {
                                     bringIntoViewRequester.bringIntoView()
                                 }
-                                // Show the dropdown right away
+
                                 dropDownExpanded = true
                             }
                         },
@@ -249,18 +245,14 @@ fun ScreenContent(modifier: Modifier) {
                     colors = textFieldColors,
                     keyboardOptions = keyboardOptions.copy(
                         imeAction = when (filteredOptions.size) {
-                            // We will either reset input or auto select the single option
                             0, 1 -> ImeAction.Done
-                            // Keyboard will hide to make room for search results
                             else -> ImeAction.Search
                         }
                     ),
                     keyboardActions = KeyboardActions(
                         onAny = {
                             when (filteredOptions.size) {
-                                // Remove focus to execute our onFocusChanged effect
                                 0, 1 -> focusManager.clearFocus(force = true)
-                                // Can't auto select option since we have a list, so hide keyboard to give more room for dropdown
                                 else -> keyboardController?.hide()
                             }
                         }
@@ -307,8 +299,8 @@ fun ScreenContent(modifier: Modifier) {
             horizontalAlignment = CenterHorizontally
         ) {
             Image(
-                painter = painterResource(id = R.drawable.logo), // replace 'your_image' with your image file name
-                contentDescription = "Logo Convert Money", // replace with your image description
+                painter = painterResource(id = R.drawable.logo),
+                contentDescription = "Logo Convert Money",
                 modifier = Modifier
                     .fillMaxWidth()
                     .size(200.dp)
@@ -327,7 +319,7 @@ fun ScreenContent(modifier: Modifier) {
                     keyboardType = KeyboardType.Number,
                     imeAction = ImeAction.Done
                 ),
-                isError = amountError, // Add this line
+                isError = amountError,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 1.dp)
@@ -345,7 +337,7 @@ fun ScreenContent(modifier: Modifier) {
                         it.contains(searchInput, ignoreCase = true)
                     }
                 },
-                isError = fromCurrencyError // Add this line
+                isError = fromCurrencyError
             )
 
 
@@ -365,7 +357,7 @@ fun ScreenContent(modifier: Modifier) {
                 isError = toCurrencyError
             )
         }
-        if (resultError) { // Add this block
+        if (resultError) {
             Text(
                 text = stringResource(id = R.string.error) + result,
                 fontSize = 20.sp,
